@@ -19,3 +19,23 @@ export function processHeaders(headers: any, data: any): any {
   }
   return headers
 }
+
+// 将headers变成对象
+export function parseHeaders(headers: string): any {
+  let parsed = Object.create(null)
+  if (!headers) {
+    return parsed
+  }
+  headers.split('\r\n').forEach(ele => {
+    let [key, val] = ele.split(':')
+    key = key.trim().toLowerCase()
+    if (!key) {
+      return
+    }
+    if (val) {
+      val = val.trim()
+    }
+    parsed[key] = val
+  })
+  return parsed
+}
