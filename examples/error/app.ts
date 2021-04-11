@@ -32,9 +32,9 @@ setTimeout(() => {
 axios({
   method: 'get',
   url: '/error/timeout',
-  timeout: 2000
+  timeout: 200
 }).then((res) => {
-  console.log(res)
+  console.log('cs',res)
 }).catch((e: AxiosError) => {
   console.log(e.message)
   console.log(e.config)
