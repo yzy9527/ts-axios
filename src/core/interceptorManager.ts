@@ -7,7 +7,6 @@ interface Interceptor<T> {
 
 export default class InterceptorManager<T> {
   private interceptors: Array<Interceptor<T> | null>
-
   constructor() {
     this.interceptors = []
   }
@@ -17,6 +16,7 @@ export default class InterceptorManager<T> {
       resolved,
       rejected
     })
+    // 作为id
     return this.interceptors.length - 1
   }
 
