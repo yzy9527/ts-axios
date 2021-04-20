@@ -40,10 +40,10 @@ const instance = axios.create({
     return qs.stringify(data)
   }), ...(axios.defaults.transformRequest as AxiosTransformer[])],
   transformResponse: [...(axios.defaults.transformResponse as AxiosTransformer[]), function(data) {
-    console.log('jj=',data)
     if (typeof data === 'object') {
       data.b = 2
     }
+    console.log('data',data)
     return data
   }]
 })
@@ -55,5 +55,5 @@ instance({
     a: 1
   }
 }).then((res) => {
-  console.log(res)
+  console.log(res.data)
 })
