@@ -38,7 +38,7 @@ stratsKeysDeepMerge.forEach(key => {
 
 export default function mergeConfig(
   config1: AxiosRequestConfig,
-  config2: AxiosRequestConfig
+  config2?: AxiosRequestConfig
 ): AxiosRequestConfig {
   if (!config2) {
     config2 = {}

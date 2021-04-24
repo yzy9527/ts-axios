@@ -63,6 +63,7 @@ export interface Axios {
     request: AxiosInterceptorManager<AxiosRequestConfig>
     response: AxiosInterceptorManager<AxiosResponse>
   }
+  getUri(config?: AxiosRequestConfig): string
 
   request<T = any>(config: AxiosRequestConfig): AxiosPromise<T>
 
@@ -93,6 +94,12 @@ export interface AxiosStatic extends AxiosInstance {
   CancelToken: CancelTokenStatic
   Cancel: CancelStatic
   isCancel: (value: any) => boolean
+
+  all<T>(promises: Array<T | Promise<T>>): Promise<T[]>
+
+  spread<T, R>(callback: (...args: T[]) => R): (arr: T[]) => R
+
+  Axios: AxiosClassStatic
 }
 
 export interface AxiosInterceptorManager<T> {
@@ -150,4 +157,8 @@ export interface CancelStatic {
 export interface AxiosBasicCredentials {
   username: string
   password: string
+}
+
+export interface AxiosClassStatic {
+  new (config: AxiosRequestConfig): Axios
 }
