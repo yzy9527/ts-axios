@@ -31,7 +31,7 @@ startKeysFromVal2.forEach(key => {
   strats[key] = fromVal2Start
 })
 
-const stratsKeysDeepMerge = ['headers']
+const stratsKeysDeepMerge = ['headers', 'auth']
 stratsKeysDeepMerge.forEach(key => {
   strats[key] = deepMergeStrats
 })

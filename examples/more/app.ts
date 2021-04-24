@@ -17,14 +17,14 @@ import qs from 'qs'
 //   console.log(res)
 // // })
 //
-const instance = axios.create({
-  xsrfCookieName: 'XSRF-TOKEN-D',
-  xsrfHeaderName: 'X-XSRF-TOKEN-D'
-})
-
-instance.get('/more/get').then(res => {
-  console.log(res)
-})
+// const instance = axios.create({
+//   xsrfCookieName: 'XSRF-TOKEN-D',
+//   xsrfHeaderName: 'X-XSRF-TOKEN-D'
+// })
+//
+// instance.get('/more/get').then(res => {
+//   console.log(res)
+// })
 // const instance = axios.create()
 //
 // function calculatePercentage(loaded: number, total: number) {
@@ -95,22 +95,22 @@ instance.get('/more/get').then(res => {
 // })
 
 
-// axios.get('/more/304').then(res => {
-//   console.log(res)
-// }).catch((e: AxiosError) => {
-//   console.log(e.message)
-// })
-//
-// axios.get('/more/304', {
-//   validateStatus(status) {
-//     return status >= 200 && status < 400
-//   }
-// }).then(res => {
-//   console.log(res)
-// }).catch((e: AxiosError) => {
-//   console.log(e.message)
-// })
-//
+axios.get('/more/304').then(res => {
+  console.log(res)
+}).catch((e: AxiosError) => {
+  console.log(e.message)
+})
+
+axios.get('/more/304', {
+  validateStatus(status) {
+    return status >= 200 && status < 400
+  }
+}).then(res => {
+  console.log(res)
+}).catch((e: AxiosError) => {
+  console.log(e.message)
+})
+
 // axios.get('/more/get', {
 //   params: new URLSearchParams('a=b&c=d')
 // }).then(res => {
