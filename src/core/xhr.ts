@@ -10,8 +10,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     const {
       data = null,
       url,
-      method = 'get',
-      headers,
+      method,
+      headers = {},
       responseType,
       timeout,
       cancelToken,
@@ -24,7 +24,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       validateStatus
     } = config
     const request = new XMLHttpRequest()
-    request.open(method.toUpperCase(), url!, true)
+    request.open(method!.toUpperCase(), url!, true)
 
     configureRequest()
 
@@ -84,15 +84,17 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     }
 
     function processHeaders(): void {
-      if ((withCredentials || isURLSameOrigin(url!)) && xsrfCookieName) {
-        const xsrfValue = cookie.read(xsrfCookieName)
-        if (xsrfValue) {
-          headers[xsrfHeaderName!] = xsrfValue
-        }
-      }
       if (isFormData(data)) {
         delete headers['Content-Type']
       }
+
+      if ((withCredentials || isURLSameOrigin(url!)) && xsrfCookieName) {
+        const xsrfValue = cookie.read(xsrfCookieName)
+        if (xsrfValue && xsrfHeaderName) {
+          headers[xsrfHeaderName] = xsrfValue
+        }
+      }
+
       if (auth) {
         headers['Authorization'] = 'Basic ' + btoa(auth.username + ':' + auth.password)
       }
@@ -108,10 +110,17 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
 
     function processCancel(): void {
       if (cancelToken) {
-        cancelToken.promise.then(reason => {
-          request.abort()
-          reject(reason)
-        })
+        cancelToken.promise
+          .then(reason => {
+            request.abort()
+            reject(reason)
+          })
+          .catch(
+            /* istanbul ignore next */
+            () => {
+              // do nothing
+            }
+          )
       }
     }
 
